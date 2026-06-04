@@ -8,7 +8,15 @@ import bookingRoutes from './routes/bookings.js'
 dotenv.config();
  const app=express();
 dbConnect();
-app.use(cors());
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'https://booking-zeta-red.vercel.app',
+  credentials: true,
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 //routes
 app.use('/api/auth',authRoutes);
