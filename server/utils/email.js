@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
+import fs from 'fs'
+
 dotenv.config();
 const transporter=nodemailer.createTransport({
     service:'gmail',
@@ -24,6 +26,7 @@ const sendBookingEmail = async (userEmail, userName, eventTitle) => {
         console.log('Email sent successfully to', userEmail);
     } catch (error) {
         console.error('Error sending email:', error);
+        fs.appendFileSync('email-errors.log', `[${new Date().toISOString()}] Error sending booking email to ${userEmail}: ${error.message}\n${error.stack}\n\n`);
     }
 };
 const sendOTPEmail = async (userEmail, otp, type) => {
@@ -52,6 +55,7 @@ const sendOTPEmail = async (userEmail, otp, type) => {
         console.log(`OTP sent to ${userEmail} for ${type}`);
     } catch (error) {
         console.error('Error sending OTP email:', error);
+        fs.appendFileSync('email-errors.log', `[${new Date().toISOString()}] Error sending OTP email to ${userEmail}: ${error.message}\n${error.stack}\n\n`);
     }
 };
 export { sendBookingEmail, sendOTPEmail };

@@ -56,7 +56,8 @@ export const createEvent = async (req, res) => {
       category,
       totalSeats,
       ticketPrice,
-      imageUrl
+      imageUrl,
+      image
     } = req.body;
 
     const event = await Events.create({
@@ -68,7 +69,7 @@ export const createEvent = async (req, res) => {
       totalSeats,
       availableSeats: totalSeats,
       ticketPrice,
-      imageUrl,
+      imageUrl: imageUrl || image || '',
       createdBy: req.user._id
     });
 
