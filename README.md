@@ -3,7 +3,6 @@
 Eventora is a full-stack MERN (MongoDB, Express, React, Node.js) application designed to facilitate seamless event discovery, booking, and management. It includes advanced features like 2FA account verification via OTP and automated email confirmation alerts.
 
 ## 📂 Repository Structure
-
 The project is structured as a monorepo:
 
 *   **`client/`**: React application built with Vite and Tailwind CSS.

@@ -97,27 +97,31 @@ const AdminDashboard = () => {
     }
   };
 
-  if (loading)
+  if (loading) {
     return (
-      <div className="text-center py-20 text-xl font-semibold">
-        Loading admin panel...
+      <div className="flex flex-col items-center justify-center py-32 gap-4">
+        <div className="w-12 h-12 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="text-xl font-semibold text-gray-400">Loading admin panel...</div>
       </div>
     );
+  }
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="bg-black text-white rounded-2xl p-6 sm:p-8 mb-8 shadow-lg flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold mb-2">
+      {/* Admin Profile Header */}
+      <div className="glass rounded-3xl p-6 sm:p-8 mb-8 border border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-brand-500/5 blur-[80px] pointer-events-none"></div>
+        <div className="text-center md:text-left">
+          <h1 className="text-2xl sm:text-3xl font-black font-display text-white mb-2">
             Admin Dashboard
           </h1>
-          <p className="text-gray-300">
-            Manage events and manually confirm bookings.
+          <p className="text-gray-400 text-sm font-medium">
+            Manage your events and manually confirm client bookings.
           </p>
         </div>
         <button
           onClick={() => setShowEventForm(!showEventForm)}
-          className="w-full md:w-auto bg-white text-black font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition shadow-md"
+          className="w-full md:w-auto bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-6 rounded-xl transition duration-300 shadow-lg shadow-brand-500/15 hover:shadow-brand-500/30 hover:-translate-y-0.5 cursor-pointer text-sm"
         >
           {showEventForm ? "Cancel Creation" : "+ Create New Event"}
         </button>
@@ -125,12 +129,12 @@ const AdminDashboard = () => {
 
       {/* Admin Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+        <div className="glass-card p-6 rounded-2xl border border-white/5 flex items-center justify-between shadow-xl">
           <div>
-            <p className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">
+            <p className="text-gray-500 text-[10px] font-extrabold uppercase tracking-widest mb-1">
               Total Revenue
             </p>
-            <h3 className="text-3xl font-black text-green-600">
+            <h3 className="text-3xl font-black font-display text-emerald-400">
               ₹
               {bookings.reduce(
                 (sum, b) =>
@@ -141,16 +145,16 @@ const AdminDashboard = () => {
               )}
             </h3>
           </div>
-          <div className="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-xl font-bold">
+          <div className="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-extrabold border border-emerald-500/20">
             ₹
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+        <div className="glass-card p-6 rounded-2xl border border-white/5 flex items-center justify-between shadow-xl">
           <div>
-            <p className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">
+            <p className="text-gray-500 text-[10px] font-extrabold uppercase tracking-widest mb-1">
               Paid Clients
             </p>
-            <h3 className="text-3xl font-black text-blue-600">
+            <h3 className="text-3xl font-black font-display text-sky-400">
               {
                 new Set(
                   bookings
@@ -163,99 +167,118 @@ const AdminDashboard = () => {
               }
             </h3>
           </div>
-          <div className="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center text-xl font-bold">
+          <div className="w-12 h-12 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center text-xl font-extrabold border border-sky-500/20">
             👤
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+        <div className="glass-card p-6 rounded-2xl border border-white/5 flex items-center justify-between shadow-xl">
           <div>
-            <p className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">
+            <p className="text-gray-500 text-[10px] font-extrabold uppercase tracking-widest mb-1">
               Pending Requests
             </p>
-            <h3 className="text-3xl font-black text-yellow-600">
+            <h3 className="text-3xl font-black font-display text-amber-400">
               {bookings.filter((b) => b.status === "pending").length}
             </h3>
           </div>
-          <div className="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-xl font-bold">
+          <div className="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-extrabold border border-amber-500/20">
             ⏳
           </div>
         </div>
       </div>
 
       {showEventForm && (
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 mb-8 animation-slideDown">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        <div className="glass-card p-8 rounded-3xl border border-white/10 mb-8 shadow-2xl animation-slideDown">
+          <h2 className="text-2xl font-black font-display mb-6 text-white">
             Create New Event
           </h2>
           <form
             onSubmit={handleCreateEvent}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            <input
-              required
-              type="text"
-              placeholder="Event Title"
-              className="border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition"
-              value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
-            />
-            <input
-              required
-              type="text"
-              placeholder="Category (e.g., Tech, Music)"
-              className="border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition"
-              value={formData.category}
-              onChange={(e) =>
-                setFormData({ ...formData, category: e.target.value })
-              }
-            />
-            <input
-              required
-              type="date"
-              className="border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition"
-              value={formData.date}
-              onChange={(e) =>
-                setFormData({ ...formData, date: e.target.value })
-              }
-            />
-            <input
-              required
-              type="text"
-              placeholder="Location"
-              className="border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition"
-              value={formData.location}
-              onChange={(e) =>
-                setFormData({ ...formData, location: e.target.value })
-              }
-            />
-            <input
-              required
-              type="number"
-              placeholder="Total Seats"
-              className="border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition"
-              value={formData.totalSeats}
-              onChange={(e) =>
-                setFormData({ ...formData, totalSeats: e.target.value })
-              }
-            />
-            <input
-              required
-              type="number"
-              placeholder="Ticket Price (0 for free)"
-              className="border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition"
-              value={formData.ticketPrice}
-              onChange={(e) =>
-                setFormData({ ...formData, ticketPrice: e.target.value })
-              }
-            />
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Event Title</label>
+              <input
+                required
+                type="text"
+                placeholder="e.g. NextGen Web Summit"
+                className="border border-white/10 bg-white/5 px-4 py-3 rounded-xl focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
+                value={formData.title}
+                onChange={(e) =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Category</label>
+              <input
+                required
+                type="text"
+                placeholder="e.g. Tech, Music, Arts"
+                className="border border-white/10 bg-white/5 px-4 py-3 rounded-xl focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
+                value={formData.category}
+                onChange={(e) =>
+                  setFormData({ ...formData, category: e.target.value })
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Date</label>
+              <input
+                required
+                type="date"
+                className="border border-white/10 bg-white/5 px-4 py-3 rounded-xl focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
+                value={formData.date}
+                onChange={(e) =>
+                  setFormData({ ...formData, date: e.target.value })
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Location</label>
+              <input
+                required
+                type="text"
+                placeholder="e.g. Science City, Kolkata"
+                className="border border-white/10 bg-white/5 px-4 py-3 rounded-xl focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
+                value={formData.location}
+                onChange={(e) =>
+                  setFormData({ ...formData, location: e.target.value })
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Total Seats Available</label>
+              <input
+                required
+                type="number"
+                placeholder="e.g. 150"
+                className="border border-white/10 bg-white/5 px-4 py-3 rounded-xl focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
+                value={formData.totalSeats}
+                onChange={(e) =>
+                  setFormData({ ...formData, totalSeats: e.target.value })
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Ticket Price (₹)</label>
+              <input
+                required
+                type="number"
+                placeholder="0 for free entry"
+                className="border border-white/10 bg-white/5 px-4 py-3 rounded-xl focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
+                value={formData.ticketPrice}
+                onChange={(e) =>
+                  setFormData({ ...formData, ticketPrice: e.target.value })
+                }
+              />
+            </div>
 
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Image URL</label>
               <input
                 type="text"
-                placeholder="Image URL (Provide any direct link to an image)"
-                className="w-full border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition"
+                placeholder="Provide direct web URL for banner image (Optional)"
+                className="w-full border border-white/10 bg-white/5 px-4 py-3 rounded-xl focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
                 value={formData.image}
                 onChange={(e) =>
                   setFormData({ ...formData, image: e.target.value })
@@ -263,18 +286,21 @@ const AdminDashboard = () => {
               />
             </div>
 
-            <textarea
-              required
-              placeholder="Event Description"
-              className="border px-4 py-3 rounded-lg md:col-span-2 h-32 focus:ring-2 focus:ring-gray-700 outline-none transition"
-              value={formData.description}
-              onChange={(e) =>
-                setFormData({ ...formData, description: e.target.value })
-              }
-            />
+            <div className="md:col-span-2 flex flex-col gap-2">
+              <label className="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest">Event Description</label>
+              <textarea
+                required
+                placeholder="Describe details about key speakers, itinerary, or other highlights..."
+                className="border border-white/10 bg-white/5 px-4 py-3 rounded-xl md:col-span-2 h-32 focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/15 focus:outline-none transition text-white placeholder-gray-600 font-medium"
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
+              />
+            </div>
             <button
               type="submit"
-              className="md:col-span-2 bg-gray-900 text-white font-bold py-3 mt-2 rounded-lg hover:bg-black transition shadow-md"
+              className="md:col-span-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-extrabold py-4 mt-2 rounded-xl transition duration-300 shadow-lg shadow-brand-500/15 hover:shadow-brand-500/30 hover:-translate-y-0.5 cursor-pointer text-base"
             >
               Publish Event
             </button>
@@ -285,46 +311,46 @@ const AdminDashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Events Section */}
         <div className="flex flex-col">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-600 text-sm">
+          <h2 className="text-2xl font-black font-display mb-6 text-white flex items-center gap-3">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 text-xs font-black">
               {events.length}
             </span>
-            All Events
+            All Active Events
           </h2>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <ul className="divide-y divide-gray-100 max-h-[600px] overflow-y-auto">
+          <div className="glass-card rounded-2xl border border-white/5 overflow-hidden shadow-xl">
+            <ul className="divide-y divide-white/5 max-h-[600px] overflow-y-auto">
               {events.length === 0 ? (
-                <li className="p-6 text-gray-500 text-center">
+                <li className="p-6 text-gray-500 text-center font-medium">
                   No events created yet.
                 </li>
               ) : (
                 events.map((event) => (
                   <li
                     key={event._id}
-                    className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-gray-50 transition border-b border-gray-100 last:border-0"
+                    className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-white/[0.02] transition border-b border-white/5 last:border-0"
                   >
-                    <div>
-                      <h4 className="font-bold text-gray-900 mb-1 leading-tight">
+                    <div className="space-y-1.5">
+                      <h4 className="font-bold text-white mb-1 leading-tight font-display text-base">
                         {event.title}
                       </h4>
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
-                        <span className="flex items-center gap-1 font-medium">
-                          <div className="w-2 h-2 rounded-full bg-blue-500"></div>{" "}
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-gray-400">
+                        <span className="flex items-center gap-1.5 font-semibold text-gray-300 bg-white/5 border border-white/5 px-2.5 py-1 rounded-full">
+                          <div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div>{" "}
                           {new Date(event.date).toLocaleDateString()}
                         </span>
-                        <span className="flex items-center gap-1 font-medium">
+                        <span className="flex items-center gap-1.5 font-semibold text-gray-300 bg-white/5 border border-white/5 px-2.5 py-1 rounded-full">
                           <div
-                            className={`w-2 h-2 rounded-full ${event.availableSeats > 0 ? "bg-green-500" : "bg-red-500"}`}
+                            className={`w-1.5 h-1.5 rounded-full ${event.availableSeats > 0 ? "bg-emerald-500" : "bg-red-500"}`}
                           ></div>{" "}
-                          {event.availableSeats}/{event.totalSeats} seats
+                          {event.availableSeats} / {event.totalSeats} seats remaining
                         </span>
                       </div>
                     </div>
                     <button
                       onClick={() => handleDeleteEvent(event._id)}
-                      className="w-full sm:w-auto text-red-500 hover:text-white hover:bg-red-500 border border-red-200 px-4 py-2 rounded-lg text-sm font-bold transition shadow-sm shrink-0"
+                      className="w-full sm:w-auto text-red-400 hover:text-white hover:bg-red-600 border border-red-500/20 hover:border-red-600 px-4 py-2 rounded-xl text-xs font-bold transition shadow-md duration-300 shrink-0 cursor-pointer"
                     >
-                      Delete
+                      Delete Event
                     </button>
                   </li>
                 ))
@@ -335,96 +361,96 @@ const AdminDashboard = () => {
 
         {/* Bookings Section */}
         <div className="flex flex-col">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-yellow-100 text-yellow-700 text-sm font-bold">
+          <h2 className="text-2xl font-black font-display mb-6 text-white flex items-center gap-3">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-black">
               {bookings.length}
             </span>
             Booking Requests
           </h2>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <ul className="divide-y divide-gray-100 max-h-[600px] overflow-y-auto">
+          <div className="glass-card rounded-2xl border border-white/5 overflow-hidden shadow-xl">
+            <ul className="divide-y divide-white/5 max-h-[600px] overflow-y-auto">
               {bookings.length === 0 ? (
-                <li className="p-6 text-gray-500 text-center">
+                <li className="p-6 text-gray-500 text-center font-medium">
                   No bookings yet.
                 </li>
               ) : (
                 bookings.map((booking) => (
                   <li
                     key={booking._id}
-                    className={`p-6 hover:bg-gray-50 transition border-l-4 ${booking.status === "pending" ? "border-l-yellow-400" : booking.status === "confirmed" ? "border-l-green-400" : "border-l-red-400"}`}
+                    className={`p-6 hover:bg-white/[0.01] transition border-l-4 ${booking.status === "pending" ? "border-l-amber-500/80" : booking.status === "confirmed" ? "border-l-emerald-500/80" : "border-l-red-500/80"}`}
                   >
-                    <div className="flex justify-between items-start mb-3">
-                      <h4 className="font-bold text-gray-900 text-lg leading-tight">
+                    <div className="flex justify-between items-start mb-3 gap-4">
+                      <h4 className="font-bold text-white text-base leading-tight font-display">
                         {booking.eventId?.title || "Deleted Event"}
                       </h4>
-                      <div className="flex flex-col gap-1 items-end shrink-0 ml-4">
+                      <div className="flex flex-col gap-1.5 items-end shrink-0 ml-4">
                         <span
-                          className={`px-2 py-1 text-[10px] font-black rounded uppercase tracking-wider ${booking.status === "confirmed" ? "bg-green-100 text-green-700" : booking.status === "cancelled" ? "bg-red-100 text-red-700" : "bg-yellow-100 text-yellow-700"}`}
+                          className={`px-2.5 py-1 text-[10px] font-black rounded-full uppercase tracking-widest border ${booking.status === "confirmed" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : booking.status === "cancelled" ? "bg-red-500/10 text-red-400 border-red-500/20" : "bg-amber-500/10 text-amber-400 border-amber-500/20"}`}
                         >
                           {booking.status}
                         </span>
                         {booking.status !== "cancelled" && (
                           <span
-                            className={`px-2 py-1 text-[10px] font-black rounded uppercase tracking-wider ${booking.paymentStatus === "paid" ? "bg-indigo-100 text-indigo-700" : "bg-gray-200 text-gray-800"}`}
+                            className={`px-2.5 py-1 text-[10px] font-black rounded-full uppercase tracking-widest border ${booking.paymentStatus === "paid" ? "bg-sky-500/10 text-sky-400 border-sky-500/20" : "bg-gray-500/10 text-gray-400 border-white/5"}`}
                           >
                             {booking.paymentStatus.replace("_", " ")}
                           </span>
                         )}
                       </div>
                     </div>
-                    <div className="bg-gray-50 rounded-lg p-3 mb-3 border border-gray-100 text-sm">
-                      <p className="text-gray-700 flex items-center gap-2 mb-1">
-                        <span className="font-bold w-16 text-gray-500 uppercase text-xs">
-                          User:
+                    <div className="bg-white/[0.01] rounded-xl p-4 mb-3 border border-white/5 text-sm space-y-2.5">
+                      <p className="text-gray-300 flex items-center gap-2">
+                        <span className="font-extrabold w-20 text-gray-500 uppercase text-[10px] tracking-widest">
+                          User
                         </span>
-                        <span className="font-semibold">
+                        <span className="font-semibold text-gray-200">
                           {booking.userId?.name}
                         </span>
-                        <span className="text-gray-400">
+                        <span className="text-gray-500 text-xs">
                           ({booking.userId?.email})
                         </span>
                       </p>
-                      <p className="text-gray-700 flex items-center gap-2 mb-1">
-                        <span className="font-bold w-16 text-gray-500 uppercase text-xs">
-                          Amount:
+                      <p className="text-gray-300 flex items-center gap-2">
+                        <span className="font-extrabold w-20 text-gray-500 uppercase text-[10px] tracking-widest">
+                          Amount
                         </span>
                         <span
-                          className={`font-semibold ${booking.amount === 0 ? "text-green-600" : ""}`}
+                          className={`font-semibold ${booking.amount === 0 ? "text-emerald-400" : "text-white"}`}
                         >
                           {booking.amount === 0 ? "Free" : `₹${booking.amount}`}
                         </span>
                       </p>
-                      <p className="text-gray-700 flex items-center gap-2 mb-1">
-                        <span className="font-bold w-16 text-gray-500 uppercase text-xs">
-                          Date:
+                      <p className="text-gray-300 flex items-center gap-2">
+                        <span className="font-extrabold w-20 text-gray-500 uppercase text-[10px] tracking-widest">
+                          Requested
                         </span>
-                        <span>
+                        <span className="text-gray-300 font-medium">
                           {new Date(booking.bookedAt).toLocaleString()}
                         </span>
                       </p>
                       {booking.eventId && (
-                        <p className="text-gray-700 flex items-center gap-2 mt-2 pt-2 border-t border-gray-200">
-                          <span className="font-bold w-16 text-gray-500 uppercase text-xs">
-                            Seats:
+                        <p className="text-gray-300 flex items-center gap-2 mt-2 pt-2 border-t border-white/5">
+                          <span className="font-extrabold w-20 text-gray-500 uppercase text-[10px] tracking-widest">
+                            Seats
                           </span>
                           <span
-                            className={`font-bold ${booking.eventId.availableSeats > 0 ? "text-green-600" : "text-red-500"}`}
+                            className={`font-bold ${booking.eventId.availableSeats > 0 ? "text-emerald-400" : "text-red-400"}`}
                           >
                             {booking.eventId.availableSeats}
                           </span>{" "}
-                          remaining of {booking.eventId.totalSeats}
+                          <span className="text-gray-500 font-normal">remaining of {booking.eventId.totalSeats}</span>
                         </p>
                       )}
                     </div>
 
                     {/* Action buttons for admin */}
                     {booking.status === "pending" && (
-                      <div className="flex flex-wrap gap-2 mt-2">
+                      <div className="flex flex-wrap gap-2 mt-3">
                         <button
                           onClick={() =>
                             handleConfirmBooking(booking._id, "paid")
                           }
-                          className="flex-1 min-w-[120px] bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 text-xs font-bold py-2.5 px-3 rounded-lg shadow-sm transition"
+                          className="flex-grow min-w-[120px] bg-emerald-500/10 text-emerald-400 hover:bg-emerald-600 hover:text-white border border-emerald-500/20 text-xs font-bold py-2.5 px-3 rounded-lg shadow-sm transition duration-300 cursor-pointer"
                         >
                           ✓ Approve as Paid
                         </button>
@@ -432,13 +458,13 @@ const AdminDashboard = () => {
                           onClick={() =>
                             handleConfirmBooking(booking._id, "not_paid")
                           }
-                          className="flex-1 min-w-[120px] bg-gray-50 text-gray-700 hover:bg-gray-800 hover:text-white border border-gray-200 text-xs font-bold py-2.5 px-3 rounded-lg shadow-sm transition"
+                          className="flex-grow min-w-[120px] bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/10 text-xs font-bold py-2.5 px-3 rounded-lg shadow-sm transition duration-300 cursor-pointer"
                         >
                           ✓ Approve Undecided
                         </button>
                         <button
                           onClick={() => handleCancelBooking(booking._id)}
-                          className="w-[80px] bg-red-50 text-red-600 hover:bg-red-500 hover:text-white border border-red-200 text-xs font-bold py-2.5 px-3 rounded-lg transition"
+                          className="w-[80px] bg-red-500/10 text-red-400 hover:bg-red-600 hover:text-white border border-red-500/20 text-xs font-bold py-2.5 px-3 rounded-lg transition duration-300 cursor-pointer"
                         >
                           ✕ Reject
                         </button>
